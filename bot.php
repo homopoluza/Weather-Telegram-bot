@@ -1,5 +1,5 @@
 <?php
-$path = "https://api.telegram.org/bot5849536509:AAHzOfwJ04kAL-cyu40UQDKJSiNwOwrYCLQ";
+$path = "https://api.telegram.org/bot<token>";
 $update = json_decode(file_get_contents("php://input"), TRUE);
 
 // User's info
@@ -32,10 +32,10 @@ if (strpos($data, $userID) === false){
     fclose($file); 
 }
 
-
+$w_api = "open_weather_api_key"; 
 if (strpos($message, "/weather") === 0) {
 $location = substr($message, 9);
-$weather = json_decode(file_get_contents("https://api.openweathermap.org/data/2.5/weather?q=".$location."&appid=3cd9ad621832ffbc3b9831c4f16721c0"), TRUE)["weather"][0]["main"];
+$weather = json_decode(file_get_contents("https://api.openweathermap.org/data/2.5/weather?q=".$location."&appid=$w_api"), TRUE)["weather"][0]["main"];
 file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=Here's the weather in ".$location.": ". $weather);
 } else {
     file_get_contents($askMeWeather);
